@@ -1,18 +1,32 @@
+// models/GroceryItem.js
 const mongoose = require('mongoose');
 
 const grocerySchema = new mongoose.Schema({
     item: {
         type: String,
-        required: [true, 'item name is required']
+        required: [true, 'Item name is required'],
+        trim: true
     },
     food_group: {
         type: String,
-        required: [true, 'food_group is required'],
-        enum: ['fruits', 'dairy', 'proteins', 'vegetrables', 'nuts', 'grains']
+        required: [true, 'Food group is required'],
+        enum: ['fruits', 'vegetables', 'proteins', 'dairy', 'grains', 'nuts']
     },
     price_in_usd: {
         type: Number,
-        required: [true, 'Please enter a number for price in USD']
+        required: [true, 'Price is required']
     },
-})
-module.exports = mongoose.model('GroceryItem', grocerySchema)
+    quantity: {
+        type: Number,
+        required: [true, 'Quantity is required'],
+        min: 0
+    },
+    calories_per_100g: Number,
+    organic: Boolean,
+    wild_caught: Boolean,
+    fat_content: String,
+    gluten_free: Boolean,
+    free_range: Boolean
+});
+
+module.exports = mongoose.model('GroceryItem', grocerySchema);
